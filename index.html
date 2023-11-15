@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue_course</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+
+    <div class="container pt-5" id="app">
+        <div class="card center">
+            <h1 :style="{
+                color: inputValue.length < 5 ? 'darkred' : 'darkblue',
+            }">{{ title }}</h1>
+            <div class="form-control">
+                <input type="text"
+                       :placeholder="placeholderString"
+                       :value="inputValue"
+                       @keypress.enter="addNote"
+                       v-model="inputValue"
+                >
+            </div>
+            <h2>inputValue: {{inputValue}}</h2>
+            <button class="btn" @click="addNote">Добавить</button>
+            <hr>
+            <ul class="list" v-if="notes.length !== 0">
+                <li class="list-item" v-for="(note, index) in notes">
+<!--                    <span :class="{-->
+<!--                          'primary':true,-->
+<!--                          'bold': note.length > 5,-->
+<!--                      }">{{note}}</span>-->
+<!--                    <span :class="['bold', {'primary': note.length>5}]">{{note}}</span>-->
+                    {{note}}
+                    <button class="btn danger" @click="deleteNote(index)">удалить</button>
+                </li>
+                <hr>
+                <li>
+                    <strong>Общее количество: {{notes.length}}</strong> | Удвоенное: {{doubleLength}}
+                </li>
+            </ul>
+            <div v-else>Заметок пока нет. Добавьте первую</div>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+</body>
+</html>
